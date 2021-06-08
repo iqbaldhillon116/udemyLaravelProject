@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+       'username' ,'name', 'email', 'password','avatar'
     ];
 
     /**
@@ -52,6 +52,15 @@ class User extends Authenticatable
 
     public function roles(){
         return $this->belongsToMany(Role::class);
+    }
+
+    //creating mutator for encrypting password alwasy when we modify user 
+    public function setPasswordAtrribute($value){
+        $this->attributes['password'] = bcrypt($value); 
+    }
+
+    public function getAvatarAttribute($value){
+        return asset('storage/'.$value);//accessor
     }
 
     public function userHasRole($role_name){
