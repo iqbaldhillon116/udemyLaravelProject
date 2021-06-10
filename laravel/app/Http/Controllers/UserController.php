@@ -11,13 +11,28 @@ class UserController extends Controller
         return view('admin.user.profile',['user'=>$user]);
     }
 
+    public function allUsers(){
+        $users=User::all();
+        
+        return view('admin.all-users',['users'=>$users]);
+    }
+
+    public function destroy(User $user){
+        $user->delete();
+
+        session()->flash('user-deleted','User has been deleted');
+
+        return back();
+    }
+
     public function update(User $user){
 
         $inputs = request()->validate([
             'username'=>['required','string','max:255'],
             'name'=>['required','string','min:6'],
             'email'=>['email','required'],
-            'avatar'=>['file']
+            'avatar'=>['file'],
+            'password'=>['min:6']
         ]);
 
 

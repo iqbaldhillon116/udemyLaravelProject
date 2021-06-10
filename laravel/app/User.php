@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Hash;
 
 class User extends Authenticatable
 {
@@ -55,8 +56,8 @@ class User extends Authenticatable
     }
 
     //creating mutator for encrypting password alwasy when we modify user 
-    public function setPasswordAtrribute($value){
-        $this->attributes['password'] = bcrypt($value); 
+    public function setPasswordAttribute($value){
+        $this->attributes['password'] = Hash::make($value); 
     }
 
     public function getAvatarAttribute($value){
