@@ -4,17 +4,18 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Role;
 
 class UserController extends Controller
 {
     public function show(User $user){
-        return view('admin.user.profile',['user'=>$user]);
+        return view('admin.user.profile',['user'=>$user,'roles'=>Role::all()]);
     }
 
     public function allUsers(){
         $users=User::all();
-        
-        return view('admin.all-users',['users'=>$users]);
+        $roles=Role::all();
+        return view('admin.all-users',['users'=>$users,'roles'=>$roles]);
     }
 
     public function destroy(User $user){
@@ -43,5 +44,19 @@ class UserController extends Controller
        $user->update($inputs);
 
        return back();
+    }
+
+    public function attach(User $user){
+
+        $user->roles()->attach(request('role'));
+        return back();
+
+    }
+
+    public function detach(User $user){
+
+        $user->roles()->detach(request('role'));
+        return back();
+
     }
 }
