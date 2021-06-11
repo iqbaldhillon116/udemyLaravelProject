@@ -62,6 +62,9 @@
             <x-sidebar.admin-user-links>
           
           </x-sidebar.admin-user-links>
+          <x-sidebar.authorization>
+          </x-sidebar.authorization> 
+           
           @endif
         
 
