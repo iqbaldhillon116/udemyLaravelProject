@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Permission;
 use Illuminate\Http\Request;
 use App\Role;
 use Illuminate\Support\Str;
@@ -27,6 +28,28 @@ class RoleController extends Controller
 
         return back();
     }
+
+    public function edit(Role $role){
+
+      return  view('admin.authorization.roleupdate',['role'=>$role,'permissions'=>Permission::all()]);
+
+    }
+
+    public function update(Role $role){
+
+        $role->name = Str::ucfirst(request('name'));
+        $role->slug = Str::of(request('name'))->slug('-');
+
+        if($role->isDirty('name')){
+              session()->flash('role-updated',$role->name.' Role has been updated');  
+        }
+        
+        $role->save();//dont forget to call this method , else it will not update anything
+
+        // return back();
+       return  redirect('/admin/roles');
+  
+      }
 
     public function destroy(Role $role){
 

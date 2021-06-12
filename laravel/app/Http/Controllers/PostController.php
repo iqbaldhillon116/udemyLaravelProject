@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Post;
+use APP\Role;
 
 class PostController extends Controller
 {
@@ -87,6 +88,8 @@ class PostController extends Controller
             return redirect()->route('post.index');
 
      }
+
+
 
    
 }

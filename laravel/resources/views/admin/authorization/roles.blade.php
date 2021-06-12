@@ -11,6 +11,8 @@
         <div class="alert alert-success">
                 {{session('role-created')}}
         </div>
+        @elseif(session('role-updated'))
+           <div class="alert alert-success">{{session('role-updated')}}</div>
         @endif
         <div class="row">
         
@@ -35,6 +37,9 @@
                     </form>
                 
                 </div>
+        </div>
+
+            <div class="row">
 
                 <div class="col-sm-9">
                 
@@ -61,7 +66,7 @@
                                     @foreach($roles as $role)
                                         <tr>
                                         <td>{{$role->id}}</td>
-                                        <td>{{$role->name}}</td>
+                                        <td><a href="{{route('user.role.edit',$role->id)}}">{{$role->name}}</a></td>
                                         <td>{{$role->slug}}</td>
                                         <td>
                                             <form method="post" action="{{route('user.role.delete',$role->id)}}">
@@ -84,7 +89,7 @@
                         
                 </div>
        
-            
+            </div> 
         </div>
         
         </div>
