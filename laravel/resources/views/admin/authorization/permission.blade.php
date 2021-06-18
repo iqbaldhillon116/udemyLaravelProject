@@ -7,30 +7,7 @@
         {{session('permission-updated')}}
     </div>
     @endif
-        <div class="row">
-        
-                <div class="col-sm-3">
-                
-                    <form method="post" action="{{route('user.permission.create')}}">
-                    @csrf
-                        <div class="form-group">
-                            <label for="role">Name:</label>
-                            <input type="text" name="name"  class="form-control @error('name') is-invalid @enderror">
-                        </div>
 
-                        <div>
-                            @error('name')
-                                <span ><strong>{{$message}}</strong></span>
-                            @enderror
-                        </div>
-
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-primary ">create</button>
-                        </div>
-                    </form>
-                
-                </div>
-        </div>
 
             <div class="row">
                 <div class="col-sm-9">
@@ -82,6 +59,7 @@
             </div>
         
         </div>
+        
 
     @endsection
 
